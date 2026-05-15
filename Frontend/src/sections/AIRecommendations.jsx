@@ -32,9 +32,9 @@ const AIRecommendations = () => {
   };
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
       maximumFractionDigits: 0,
     }).format(price);
   };
@@ -61,7 +61,7 @@ const AIRecommendations = () => {
             </h2>
           </div>
           <p className="text-rich-dark/40 max-w-md text-sm font-medium">
-            Our neural network analyzed your preferences to find properties that perfectly match your lifestyle and investment goals.
+            We analyze your requirements to find properties and loan options that perfectly match your lifestyle and financial goals.
           </p>
         </div>
 

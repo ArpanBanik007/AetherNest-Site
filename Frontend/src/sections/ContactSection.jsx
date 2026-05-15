@@ -22,7 +22,7 @@ const ContactSection = ({ id }) => {
               <span className="text-primary italic">Journey</span>
             </h2>
             <p className="text-xl text-rich-dark/60 mb-12 leading-relaxed">
-              Our luxury property specialists are ready to help you find the perfect sanctuary or investment.
+              Our consultancy specialists are ready to help you find the perfect property or secure a hassle-free home loan in Howrah.
             </p>
 
             <div className="space-y-8">
@@ -32,7 +32,7 @@ const ContactSection = ({ id }) => {
                 </div>
                 <div>
                   <div className="text-[10px] text-rich-dark/40 font-bold uppercase tracking-widest mb-1">Call Us</div>
-                  <div className="text-xl font-bold tracking-tight text-rich-dark group-hover:text-primary transition-colors">+1 (800) AETHERNEST</div>
+                  <div className="text-xl font-bold tracking-tight text-rich-dark group-hover:text-primary transition-colors">+91 [Phone Number]</div>
                 </div>
               </div>
 
@@ -42,7 +42,7 @@ const ContactSection = ({ id }) => {
                 </div>
                 <div>
                   <div className="text-[10px] text-rich-dark/40 font-bold uppercase tracking-widest mb-1">Email Us</div>
-                  <div className="text-xl font-bold tracking-tight text-rich-dark group-hover:text-primary transition-colors">hello@aethernest.com</div>
+                  <div className="text-xl font-bold tracking-tight text-rich-dark group-hover:text-primary transition-colors">contact@disharealty.com</div>
                 </div>
               </div>
 
@@ -52,7 +52,7 @@ const ContactSection = ({ id }) => {
                 </div>
                 <div>
                   <div className="text-[10px] text-rich-dark/40 font-bold uppercase tracking-widest mb-1">Office</div>
-                  <div className="text-xl font-bold tracking-tight text-rich-dark group-hover:text-primary transition-colors">Palm Jumeirah, Dubai, UAE</div>
+                  <div className="text-xl font-bold tracking-tight text-rich-dark group-hover:text-primary transition-colors">Kadamtala Bazar Road, Howrah, West Bengal</div>
                 </div>
               </div>
             </div>
@@ -89,9 +89,9 @@ const ContactSection = ({ id }) => {
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-rich-dark/40 ml-2">Subject</label>
                   <select className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 text-sm font-bold text-rich-dark focus:outline-none focus:border-primary appearance-none cursor-pointer">
-                    <option>Property Inquiry</option>
-                    <option>Investment Consultation</option>
-                    <option>Selling Your Property</option>
+                    <option>Home Loan Inquiry</option>
+                    <option>Property Consultation</option>
+                    <option>Registration Support</option>
                   </select>
                 </div>
 
@@ -99,7 +99,7 @@ const ContactSection = ({ id }) => {
                   <label className="text-[10px] font-bold uppercase tracking-widest text-rich-dark/40 ml-2">Message</label>
                   <textarea 
                     rows={4} 
-                    placeholder="Tell us about your dream home..." 
+                    placeholder="How can we help you today?" 
                     className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 text-sm font-bold text-rich-dark focus:outline-none focus:border-primary focus:bg-white transition-all resize-none"
                   />
                 </div>

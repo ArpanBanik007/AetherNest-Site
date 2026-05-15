@@ -4,31 +4,31 @@ import { GlassCard, GlowButton } from '../components/common/UI';
 
 const agents = [
   {
-    name: "Alexander Sterling",
-    role: "Senior Partner - Dubai",
+    name: "Rajesh Sharma",
+    role: "Senior Consultant",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2000&auto=format&fit=crop",
-    experience: "15+ Years",
-    properties: "450+ Sold",
-    rating: 4.9,
-    bio: "Specializing in ultra-high-net-worth real estate acquisitions across the GCC region."
-  },
-  {
-    name: "Sophia Valentine",
-    role: "Global Listings Director",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2000&auto=format&fit=crop",
-    experience: "10+ Years",
-    properties: "320+ Sold",
-    rating: 5.0,
-    bio: "Exquisite taste and an unparalleled network of international luxury buyers."
-  },
-  {
-    name: "Marcus Chen",
-    role: "Investment Strategist",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2000&auto=format&fit=crop",
     experience: "12+ Years",
-    properties: "580+ Sold",
+    properties: "200+ Assisted",
+    rating: 4.9,
+    bio: "Expert in home loan processing and bank coordination for residential properties in Howrah."
+  },
+  {
+    name: "Priya Mukherjee",
+    role: "Real Estate Advisor",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2000&auto=format&fit=crop",
+    experience: "8+ Years",
+    properties: "150+ Assisted",
+    rating: 5.0,
+    bio: "Dedicated to helping families find their dream homes with smooth documentation and registration."
+  },
+  {
+    name: "Amit Das",
+    role: "Loan Specialist",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2000&auto=format&fit=crop",
+    experience: "10+ Years",
+    properties: "300+ Loans",
     rating: 4.8,
-    bio: "Expert in identifying high-yield residential and commercial property opportunities."
+    bio: "Providing comprehensive support for all types of home loans and bank-related paperwork."
   }
 ];
 
@@ -40,9 +40,9 @@ const LuxuryAgents = ({ id }) => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
-            <span className="text-primary font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block">WORLD-CLASS EXPERTISE</span>
+            <span className="text-primary font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block">EXPERT CONSULTANCY</span>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-rich-dark">
-              Meet Our <span className="text-primary italic">Trusted</span> Agents
+              Meet Our <span className="text-primary italic">Expert</span> Consultants
             </h2>
           </div>
           <GlowButton variant="secondary" className="text-[10px] px-8 py-4 !rounded-xl">View All Agents</GlowButton>

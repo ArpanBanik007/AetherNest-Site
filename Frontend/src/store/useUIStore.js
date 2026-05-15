@@ -32,7 +32,7 @@ const useUIStore = create(
       setGlobalLoading: (isLoading) => set({ globalLoading: isLoading }),
     }),
     {
-      name: 'aethernest-ui-storage',
+      name: 'disharealty-ui-storage',
       partialize: (state) => ({ isDarkMode: state.isDarkMode }), // Only persist dark mode
     }
   )

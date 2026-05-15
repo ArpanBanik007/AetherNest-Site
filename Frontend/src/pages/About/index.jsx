@@ -7,10 +7,10 @@ const About = () => {
   const navigate = useNavigate();
   const stats = [
 
-    { label: 'Asset Magnitude', value: '$12.4B+' },
-    { label: 'Elite Closures', value: '2,500+' },
-    { label: 'Global Advisors', value: '150+' },
-    { label: 'Years of Excellence', value: '12' },
+    { label: 'Happy Clients', value: '98+' },
+    { label: 'Loan Success', value: '100+' },
+    { label: 'Service Rating', value: '4.9/5' },
+    { label: 'Years of Excellence', value: '11+' },
   ];
 
   return (
@@ -25,11 +25,11 @@ const About = () => {
           >
             <span className="text-primary font-bold tracking-[0.4em] text-[10px] uppercase mb-6 block">OUR LEGACY</span>
             <h1 className="text-5xl md:text-7xl font-extrabold text-rich-dark mb-10 tracking-tight leading-[1.1]">
-              Redefining <br />
-              <span className="text-primary">Luxury Narrative.</span>
+              Your Trusted <br />
+              <span className="text-primary">Property Partner.</span>
             </h1>
             <p className="text-rich-dark/40 text-lg font-medium leading-relaxed mb-12 max-w-xl">
-              AetherNest isn't just a real estate platform; it's a gateway to the most exclusive lifestyle experiences in the UAE. We curate architectural masterpieces for those who demand nothing less than perfection.
+              Disha Realty is a trusted real estate and home loan consultancy company in Howrah. We provide expert guidance for property purchase, home loans, and documentation support to make your journey hassle-free.
             </p>
             <div className="flex flex-wrap gap-6">
               <GlowButton variant="emerald" className="px-10 py-5 text-[10px]" onClick={() => navigate('/properties')}>
@@ -37,7 +37,7 @@ const About = () => {
               </GlowButton>
 
               <button className="px-10 py-5 rounded-2xl border border-gray-100 text-[10px] font-bold text-rich-dark uppercase tracking-[0.2em] hover:bg-gray-50 transition-all">
-                The Aether Standard
+                The Disha Realty Standard
               </button>
             </div>
           </motion.div>
@@ -61,8 +61,8 @@ const About = () => {
                   <Award size={32} />
                 </div>
                 <div>
-                  <h4 className="text-2xl font-extrabold text-rich-dark">#1 Elite Agency</h4>
-                  <p className="text-[10px] font-bold text-rich-dark/20 uppercase tracking-[0.2em]">Luxury Sector 2025</p>
+                  <h4 className="text-2xl font-extrabold text-rich-dark">#1 Trusted Agency</h4>
+                  <p className="text-[10px] font-bold text-rich-dark/20 uppercase tracking-[0.2em]">In Howrah Since 2013</p>
                 </div>
               </div>
             </div>
@@ -90,14 +90,14 @@ const About = () => {
         <div className="mb-40">
           <div className="text-center mb-24">
             <span className="text-primary font-bold tracking-[0.4em] text-[10px] uppercase mb-6 block">OUR CORE VECTORS</span>
-            <h2 className="text-4xl md:text-6xl font-extrabold text-rich-dark tracking-tight">The Pillars of <span className="text-primary">AetherNest.</span></h2>
+            <h2 className="text-4xl md:text-6xl font-extrabold text-rich-dark tracking-tight">The Pillars of <span className="text-primary">Disha Realty.</span></h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-16">
             {[
-              { icon: <ShieldCheck size={32} />, title: "Integrity First", desc: "Absolute transparency in every transaction, ensuring your portfolio is built on trust." },
-              { icon: <Target size={32} />, title: "Precision Curation", desc: "We don't just list properties; we select architectural triumphs that resonate with elite lifestyles." },
-              { icon: <Users size={32} />, title: "Concierge Service", desc: "From acquisition to property management, our advisors provide a 360° white-glove experience." }
+              { icon: <ShieldCheck size={32} />, title: "Trust First", desc: "Absolute transparency in every transaction, ensuring your home loan and property purchase is built on trust." },
+              { icon: <Target size={32} />, title: "Expert Support", desc: "We provide end-to-end assistance for documentation, bank coordination, and registration." },
+              { icon: <Users size={32} />, title: "Customer Focused", desc: "Known for our smooth loan processing, transparent communication, and cooperative staff." }
             ].map((value, i) => (
               <motion.div
                 key={i}
@@ -123,12 +123,12 @@ const About = () => {
           <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent pointer-events-none" />
           
           <div className="relative z-10">
-            <span className="text-primary font-bold tracking-[0.4em] text-[10px] uppercase mb-8 block">GLOBAL INTELLIGENCE</span>
-            <h2 className="text-4xl md:text-7xl font-extrabold text-white mb-10 tracking-tight leading-tight">Elite Network <br /> <span className="text-primary italic">Universal Presence.</span></h2>
-            <p className="text-white/40 text-xl font-medium max-w-2xl mx-auto mb-16 leading-relaxed">Headquartered in Dubai, our network spans the most influential financial and cultural hubs globally.</p>
+            <span className="text-primary font-bold tracking-[0.4em] text-[10px] uppercase mb-8 block">LOCAL EXPERTISE</span>
+            <h2 className="text-4xl md:text-7xl font-extrabold text-white mb-10 tracking-tight leading-tight">Strong Roots <br /> <span className="text-primary italic">Universal Trust.</span></h2>
+            <p className="text-white/40 text-xl font-medium max-w-2xl mx-auto mb-16 leading-relaxed">Headquartered in Howrah, West Bengal, our network provides expert real estate solutions across the region.</p>
             
             <div className="flex flex-wrap justify-center gap-16">
-              {['Dubai', 'London', 'New York', 'Singapore'].map((city, i) => (
+              {['Howrah', 'Kolkata', 'Hooghly', 'West Bengal'].map((city, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_15px_rgba(0,166,81,0.8)]" />
                   <span className="text-sm font-bold text-white uppercase tracking-[0.2em]">{city}</span>

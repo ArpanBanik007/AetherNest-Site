@@ -5,20 +5,28 @@ import { GlassCard } from '../components/common/UI';
 
 const faqs = [
   {
-    question: "How do I start the buying process?",
-    answer: "The process begins with a consultation with one of our luxury advisors. We'll help you define your requirements, secure financing, and identify exclusive off-market opportunities."
+    question: "How can Disha Realty help with home loans?",
+    answer: "We provide end-to-end support including bank coordination, documentation help, and smooth loan processing to ensure you get the best interest rates."
   },
   {
-    question: "What makes AetherNest different from other agencies?",
-    answer: "We combine world-class real estate expertise with advanced AI technology to provide our clients with unparalleled market insights and a seamless, tech-driven experience."
+    question: "Which banks do you coordinate with?",
+    answer: "We coordinate with all major nationalized and private banks including SBI, HDFC, ICICI, and Axis Bank to find the best loan offer for you."
   },
   {
-    question: "Do you offer property management services?",
-    answer: "Yes, we provide comprehensive property management services for our investors, including tenant screening, maintenance, and yield optimization using our proprietary software."
+    question: "How long does loan processing take?",
+    answer: "Processing time typically varies between 7 to 15 working days depending on the bank and document verification status."
   },
   {
-    question: "Can I buy property using cryptocurrency?",
-    answer: "Absolutely. We have established protocols for secure real estate transactions using major cryptocurrencies, ensuring full legal compliance and transparency."
+    question: "Do you help with property registration?",
+    answer: "Yes, we provide full support for property registration, including legal verification and paperwork management at the registrar's office."
+  },
+  {
+    question: "Is consultation available for first-time buyers?",
+    answer: "Absolutely! We specialize in guiding first-time home buyers through the entire process of property selection and loan application."
+  },
+  {
+    question: "Do you assist with documentation and paperwork?",
+    answer: "Yes, our team handles all legal and bank-related documentation to make your property purchase journey hassle-free."
   }
 ];
 

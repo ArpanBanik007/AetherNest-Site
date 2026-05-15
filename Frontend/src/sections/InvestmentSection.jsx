@@ -4,12 +4,12 @@ import { TrendingUp, PieChart, BarChart3, ArrowUpRight, Zap } from 'lucide-react
 import { GlassCard, GlowButton } from '../components/common/UI';
 
 const data = [
-  { name: '2020', value: 4000 },
-  { name: '2021', value: 5500 },
-  { name: '2022', value: 4800 },
-  { name: '2023', value: 7000 },
-  { name: '2024', value: 8500 },
-  { name: '2025', value: 12000 },
+  { name: 'Step 1', value: 4000 },
+  { name: 'Step 2', value: 5500 },
+  { name: 'Step 3', value: 4800 },
+  { name: 'Step 4', value: 7000 },
+  { name: 'Step 5', value: 8500 },
+  { name: 'Step 6', value: 12000 },
 ];
 
 const InvestmentSection = ({ id }) => {
@@ -30,11 +30,11 @@ const InvestmentSection = ({ id }) => {
             <GlassCard className="p-10 border-gray-100 bg-white shadow-2xl shadow-black/5 !rounded-[3rem]">
               <div className="flex items-center justify-between mb-12">
                 <div>
-                  <h3 className="text-3xl font-bold tracking-tight text-rich-dark">Market Growth</h3>
-                  <p className="text-rich-dark/40 text-xs font-bold uppercase tracking-widest mt-2">Real Estate Appreciation Index</p>
+                  <h3 className="text-3xl font-bold tracking-tight text-rich-dark">Loan Approval Rate</h3>
+                  <p className="text-rich-dark/40 text-xs font-bold uppercase tracking-widest mt-2">Successful Consultations over time</p>
                 </div>
                 <div className="px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase">
-                  +32.8% PROJECTION
+                  98% SUCCESS RATE
                 </div>
               </div>
 
@@ -75,9 +75,9 @@ const InvestmentSection = ({ id }) => {
 
               <div className="grid grid-cols-3 gap-6 mt-12">
                 {[
-                  { label: "Annual ROI", val: "22.4%" },
-                  { label: "Rental Yield", val: "9.1%" },
-                  { label: "Stability", val: "High" }
+                  { label: "Approval Time", val: "Fast" },
+                  { label: "Interest Rate", val: "Low" },
+                  { label: "Support", val: "24/7" }
                 ].map((stat, i) => (
                   <div key={i} className="p-6 rounded-3xl bg-gray-50 border border-gray-100 group hover:bg-white hover:shadow-xl transition-all">
                     <div className="text-rich-dark/40 text-[8px] font-bold uppercase tracking-widest mb-2">{stat.label}</div>
@@ -107,34 +107,34 @@ const InvestmentSection = ({ id }) => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <span className="text-primary font-bold tracking-[0.4em] text-[10px] uppercase mb-6 block">Maximize Your Returns</span>
+            <span className="text-primary font-bold tracking-[0.4em] text-[10px] uppercase mb-6 block">Hassle-Free Processing</span>
             <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-10 leading-[1.05] text-rich-dark">
-              Invest with <br />
-              <span className="text-primary italic">Confidence</span>
+              Smooth Loan <br />
+              <span className="text-primary italic">Processing</span>
             </h2>
             <p className="text-xl text-rich-dark/60 mb-12 leading-relaxed">
-              Our advanced data analytics platform provides real-time market insights to help you build a high-performance luxury property portfolio.
+              We coordinate with leading banks to ensure your home loan is processed quickly and transparently.
             </p>
 
             <div className="space-y-8 mb-16">
-              {[
-                { title: "Market Forecasting", desc: "Stay ahead with AI-powered property value projections.", icon: TrendingUp, color: "text-primary" },
-                { title: "Yield Management", desc: "Optimize your rental income with dynamic pricing tools.", icon: BarChart3, color: "text-primary" }
-              ].map((item, i) => (
-                <div key={i} className="flex gap-6 p-6 rounded-[2rem] hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 group">
-                  <div className={`w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center ${item.color} group-hover:bg-primary group-hover:text-white transition-all`}>
-                    <item.icon size={28} />
+                {[
+                  { title: "Bank Coordination", desc: "Direct liaison with major banks for better interest rates.", icon: TrendingUp, color: "text-primary" },
+                  { title: "Documentation Support", desc: "Expert help with all necessary paperwork and verification.", icon: BarChart3, color: "text-primary" }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-6 p-6 rounded-[2rem] hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 group">
+                    <div className={`w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center ${item.color} group-hover:bg-primary group-hover:text-white transition-all`}>
+                      <item.icon size={28} />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold tracking-tight text-rich-dark mb-1">{item.title}</h4>
+                      <p className="text-rich-dark/40 text-sm font-medium">{item.desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-lg font-bold tracking-tight text-rich-dark mb-1">{item.title}</h4>
-                    <p className="text-rich-dark/40 text-sm font-medium">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
 
             <GlowButton variant="emerald" className="gap-4 px-12 py-6 text-sm shadow-2xl">
-              Start Investing <ArrowUpRight size={20} />
+              Apply for Home Loan <ArrowUpRight size={20} />
             </GlowButton>
           </motion.div>
         </div>

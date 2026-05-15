@@ -37,24 +37,24 @@ const Contact = () => {
             CONTACT OUR ADVISORS
           </motion.span>
           <h1 className="text-4xl md:text-7xl font-extrabold text-rich-dark mb-8 tracking-tight">
-            Initiate Your <br />
-            <span className="text-primary">Concierge Experience.</span>
+            Let's Start Your <br />
+            <span className="text-primary">Property Journey.</span>
           </h1>
           <p className="text-rich-dark/40 max-w-2xl mx-auto font-medium text-lg leading-relaxed">
-            Our private wealth advisors are available globally to assist with your architectural acquisitions and portfolio strategy.
+            Our consultants are here to assist you with home loans, property verification, and finding your ideal home in Howrah and Kolkata.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-16 items-start">
           {/* Contact Information */}
           <div className="space-y-10">
-            <h3 className="text-2xl font-extrabold text-rich-dark tracking-tight mb-12">Global Headquarters</h3>
+            <h3 className="text-2xl font-extrabold text-rich-dark tracking-tight mb-12">Visit Our Office</h3>
             
             {[
-              { icon: <MapPin size={24} />, title: "Dubai Address", details: "Aether Tower, Suite 4402, Downtown Dubai, UAE" },
-              { icon: <Phone size={24} />, title: "Private Registry", details: "+971 (0) 4 888 0000" },
-              { icon: <Mail size={24} />, title: "Advisor Portal", details: "concierge@aethernest.com" },
-              { icon: <Clock size={24} />, title: "Availability", details: "24/7 Global White-Glove Support" }
+              { icon: <MapPin size={24} />, title: "Head Office", details: "Kadamtala Bazar Road, Howrah, West Bengal" },
+              { icon: <Phone size={24} />, title: "Support Line", details: "+91 [Phone Number]" },
+              { icon: <Mail size={24} />, title: "Support Portal", details: "contact@disharealty.com" },
+              { icon: <Clock size={24} />, title: "Availability", details: "Mon - Sat: 10 AM - 8 PM" }
             ].map((item, i) => (
               <motion.div 
                 key={i}
@@ -74,9 +74,9 @@ const Contact = () => {
             ))}
 
             <div className="pt-12 border-t border-gray-100">
-              <h4 className="text-[10px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] mb-8">Follow Our Journal</h4>
+              <h4 className="text-[10px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] mb-8">Follow Us</h4>
               <div className="flex gap-4">
-                {['Instagram', 'LinkedIn', 'Twitter', 'YouTube'].map((social) => (
+                {['Facebook', 'Instagram', 'LinkedIn', 'YouTube'].map((social) => (
                   <button key={social} className="px-6 py-3 rounded-xl bg-gray-50 text-[10px] font-bold text-rich-dark/30 hover:text-primary hover:bg-white hover:shadow-premium transition-all uppercase tracking-widest">
                     {social}
                   </button>
@@ -92,27 +92,27 @@ const Contact = () => {
               <div className="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:bg-primary/10 transition-colors" />
               
               <div className="mb-16">
-                <h3 className="text-3xl font-extrabold text-rich-dark tracking-tight mb-4">Inquiry Specification</h3>
-                <p className="text-rich-dark/30 font-medium">Specify your requirements for a prioritized advisor assignment.</p>
+                <h3 className="text-3xl font-extrabold text-rich-dark tracking-tight mb-4">Inquiry Form</h3>
+                <p className="text-rich-dark/30 font-medium">Tell us about your requirements and our team will get back to you shortly.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-2">
-                    <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Full Legal Name</label>
+                    <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Full Name</label>
                     <input 
                       type="text" 
                       required
-                      placeholder="Alexander Knight" 
+                      placeholder="Your Name" 
                       className="w-full bg-gray-50 border-none rounded-2xl py-5 px-8 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/10"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Private Email</label>
+                    <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Email Address</label>
                     <input 
                       type="email" 
                       required
-                      placeholder="alex@knight-holdings.com" 
+                      placeholder="email@example.com" 
                       className="w-full bg-gray-50 border-none rounded-2xl py-5 px-8 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/10"
                     />
                   </div>
@@ -120,31 +120,31 @@ const Contact = () => {
 
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-2">
-                    <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Telephone</label>
+                    <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Phone Number</label>
                     <input 
                       type="tel" 
                       required
-                      placeholder="+971 50 000 0000" 
+                      placeholder="+91 00000 00000" 
                       className="w-full bg-gray-50 border-none rounded-2xl py-5 px-8 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/10"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Subject of Interest</label>
+                    <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">I am interested in</label>
                     <select className="w-full bg-gray-50 border-none rounded-2xl py-5 px-8 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all outline-none appearance-none">
-                      <option>Off-Market Asset Acquisition</option>
-                      <option>Portfolio Management</option>
-                      <option>Investment Consultation</option>
-                      <option>Media & Partnership</option>
+                      <option>Home Loan Assistance</option>
+                      <option>Property Purchase</option>
+                      <option>Property Selling</option>
+                      <option>Registration Support</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Inquiry Details</label>
+                  <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Message</label>
                   <textarea 
                     rows="6"
                     required
-                    placeholder="Describe your architectural preferences, target locations, or investment objectives..." 
+                    placeholder="How can we help you?" 
                     className="w-full bg-gray-50 border-none rounded-3xl py-6 px-8 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/10 resize-none"
                   ></textarea>
                 </div>
@@ -156,13 +156,13 @@ const Contact = () => {
                     className="w-full py-6 text-[10px] uppercase tracking-[0.3em] shadow-xl shadow-primary/20 flex items-center justify-center gap-4 group disabled:opacity-70"
                   >
                     {submitting ? (
-                      <>Transmitting Inquiry <Loader2 size={18} className="animate-spin" /></>
+                      <>Sending Inquiry <Loader2 size={18} className="animate-spin" /></>
                     ) : (
-                      <>Submit Inquiry Registry <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>
+                      <>Send Message <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>
                     )}
                   </GlowButton>
                   <p className="text-center text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.2em] mt-8">
-                    By submitting, you agree to our <span className="text-primary hover:underline cursor-pointer">Privacy Protocols</span> and <span className="text-primary hover:underline cursor-pointer">Terms of Engagement</span>.
+                    By submitting, you agree to our <span className="text-primary hover:underline cursor-pointer">Privacy Policy</span> and <span className="text-primary hover:underline cursor-pointer">Terms of Service</span>.
                   </p>
                 </div>
               </form>
@@ -170,22 +170,6 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Global Offices Map Placeholder */}
-        <div className="mt-40 rounded-[5rem] overflow-hidden aspect-[21/9] relative shadow-2xl group border border-gray-100">
-          <img 
-            src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=2000&auto=format&fit=crop" 
-            alt="Global Network" 
-            className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-rich-dark/20 group-hover:bg-rich-dark/10 transition-colors" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center p-16 rounded-[4rem] bg-white/10 backdrop-blur-3xl border border-white/20">
-              <Globe size={64} className="text-white mb-8 mx-auto animate-spin-slow" />
-              <h3 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Our Global Footprint</h3>
-              <p className="text-white/60 font-bold text-[10px] uppercase tracking-[0.4em]">Activating localized expertise across 4 continents</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

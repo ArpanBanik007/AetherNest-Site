@@ -5,7 +5,7 @@ export const agents = [
     role: "Senior Luxury Consultant",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alexander",
     phone: "+971 50 111 2222",
-    email: "alexander@aethernest.com",
+    email: "alexander@disharealty.com",
     stats: {
       sales: "120M+",
       experience: "12 Years",
@@ -19,7 +19,7 @@ export const agents = [
     role: "Beachfront Property Expert",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sophia",
     phone: "+971 50 333 4444",
-    email: "sophia@aethernest.com",
+    email: "sophia@disharealty.com",
     stats: {
       sales: "85M+",
       experience: "8 Years",
@@ -33,7 +33,7 @@ export const agents = [
     role: "Urban Development Specialist",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
     phone: "+971 50 555 6666",
-    email: "david@aethernest.com",
+    email: "david@disharealty.com",
     stats: {
       sales: "45M+",
       experience: "5 Years",
@@ -47,7 +47,7 @@ export const agents = [
     role: "New Construction Advisor",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Isabella",
     phone: "+971 50 777 8888",
-    email: "isabella@aethernest.com",
+    email: "isabella@disharealty.com",
     stats: {
       sales: "60M+",
       experience: "6 Years",

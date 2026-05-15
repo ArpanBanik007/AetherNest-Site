@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { Users, Home, Award, TrendingUp } from 'lucide-react';
 
 const stats = [
-  { label: 'Happy Clients', value: '2.5k+', icon: Users, delay: 0.1 },
-  { label: 'Luxury Properties', value: '850+', icon: Home, delay: 0.2 },
-  { label: 'Awards Won', value: '12', icon: Award, delay: 0.3 },
-  { label: 'Annual Growth', value: '24%', icon: TrendingUp, delay: 0.4 },
+  { label: 'Happy Clients', value: '98+', icon: Users, delay: 0.1 },
+  { label: 'Years Experience', value: '11+', icon: Home, delay: 0.2 },
+  { label: 'Star Rating', value: '4.9', icon: Award, delay: 0.3 },
+  { label: 'Loan Consultations', value: '100+', icon: TrendingUp, delay: 0.4 },
 ];
 
 const Statistics = () => {

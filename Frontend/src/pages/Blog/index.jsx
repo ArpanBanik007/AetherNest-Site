@@ -32,7 +32,7 @@ const Blog = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-primary font-bold tracking-[0.4em] text-[10px] uppercase mb-6 block"
             >
-              AETHERNEST JOURNAL
+              DISHA REALTY JOURNAL
             </motion.span>
             <h1 className="text-4xl md:text-7xl font-extrabold text-rich-dark mb-8 tracking-tight leading-tight">
               Curated <br />
@@ -208,7 +208,7 @@ const Blog = () => {
                 </div>
                 <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100">
                   <input type="checkbox" required id="consent" className="mt-1 w-5 h-5 rounded border-gray-200 text-primary focus:ring-primary" />
-                  <label htmlFor="consent" className="text-[10px] text-rich-dark/30 font-bold uppercase leading-relaxed tracking-widest">I authorize AetherNest to transmit off-market opportunities and market analytics.</label>
+                  <label htmlFor="consent" className="text-[10px] text-rich-dark/30 font-bold uppercase leading-relaxed tracking-widest">I authorize Disha Realty to transmit property opportunities and market updates.</label>
                 </div>
                 <button 
                   disabled={submitting}

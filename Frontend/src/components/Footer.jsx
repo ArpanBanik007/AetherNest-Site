@@ -14,15 +14,15 @@ const Footer = () => {
           <div className="space-y-10">
             <div className="flex items-center gap-3">
               <div className="w-11 h-11 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-xl font-bold text-white italic">A</span>
+                <span className="text-xl font-bold text-white italic">D</span>
               </div>
               <div className="flex flex-col -gap-0.5">
-                <span className="text-xl font-extrabold tracking-tight text-rich-dark">AETHERNEST</span>
-                <span className="text-[9px] font-bold tracking-[0.2em] text-primary uppercase">Elite Real Estate</span>
+                <span className="text-xl font-extrabold tracking-tight text-rich-dark">DISHA REALTY</span>
+                <span className="text-[9px] font-bold tracking-[0.2em] text-primary uppercase">Home Loan & Real Estate</span>
               </div>
             </div>
             <p className="text-rich-dark/40 text-sm leading-relaxed font-medium">
-              Revolutionizing the luxury real estate experience through innovation, integrity, and unparalleled service across the UAE.
+              Your trusted partner for property and home loans in Howrah. Providing expert guidance and end-to-end support since 2013.
             </p>
             <div className="flex gap-4">
               {[Camera, Share2, UserPlus, PlayCircle].map((Icon, i) => (
@@ -35,13 +35,13 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] mb-10 text-rich-dark/80">Properties</h4>
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] mb-10 text-rich-dark/80">Our Services</h4>
             <ul className="space-y-4 text-rich-dark/40 text-[13px] font-bold uppercase tracking-widest">
-              <li><Link to="/properties" className="hover:text-primary transition-colors">Villas</Link></li>
-              <li><Link to="/properties" className="hover:text-primary transition-colors">Penthouses</Link></li>
-              <li><Link to="/properties" className="hover:text-primary transition-colors">Apartments</Link></li>
-              <li><Link to="/compare" className="hover:text-primary transition-colors">Compare</Link></li>
-              <li><Link to="/properties" className="hover:text-primary transition-colors">Off-Plan</Link></li>
+              <li><Link to="/#categories" className="hover:text-primary transition-colors">Home Loan Assistance</Link></li>
+              <li><Link to="/#categories" className="hover:text-primary transition-colors">Property Purchase</Link></li>
+              <li><Link to="/#calculator" className="hover:text-primary transition-colors">Loan Processing</Link></li>
+              <li><Link to="/#categories" className="hover:text-primary transition-colors">Registration Support</Link></li>
+              <li><Link to="/properties" className="hover:text-primary transition-colors">Residential Sales</Link></li>
             </ul>
           </div>
 
@@ -50,10 +50,10 @@ const Footer = () => {
             <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] mb-10 text-rich-dark/80">Company</h4>
             <ul className="space-y-4 text-rich-dark/40 text-[13px] font-bold uppercase tracking-widest">
               <li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link to="/agents" className="hover:text-primary transition-colors">Our Agents</Link></li>
+              <li><Link to="/#testimonials" className="hover:text-primary transition-colors">Customer Reviews</Link></li>
               <li><Link to="/blog" className="hover:text-primary transition-colors">Market Insights</Link></li>
-              <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
-              <li><Link to="/dashboard" className="hover:text-primary transition-colors">Dashboard</Link></li>
+              <li><Link to="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
+              <li><Link to="/dashboard" className="hover:text-primary transition-colors">Member Portal</Link></li>
             </ul>
           </div>
 
@@ -75,7 +75,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-16 border-t border-gray-50 flex flex-col lg:flex-row justify-between items-center gap-10">
           <p className="text-rich-dark/20 text-[10px] font-bold tracking-[0.3em] uppercase">
-            © 2026 AETHERNEST. ALL RIGHTS RESERVED.
+            © 2026 DISHA REALTY. ALL RIGHTS RESERVED.
           </p>
           
           <div className="flex gap-4">

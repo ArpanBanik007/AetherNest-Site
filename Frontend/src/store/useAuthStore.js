@@ -69,7 +69,7 @@ const useAuthStore = create(
       }
     }),
     {
-      name: 'aethernest-auth-storage',
+      name: 'disharealty-auth-storage',
     }
   )
 );

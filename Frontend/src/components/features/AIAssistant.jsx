@@ -6,7 +6,7 @@ import { GlowButton } from '../common/UI';
 const AIAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: "Hello! I'm your AetherNest AI advisor. I can help you find luxury properties based on your lifestyle. What are you looking for today?" }
+    { role: 'assistant', content: "Hello! I'm your Disha Realty AI advisor. I can help you find properties and home loan solutions in Howrah. How can I assist you today?" }
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);

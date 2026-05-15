@@ -22,7 +22,7 @@ const FeaturedProperties = ({ id }) => {
             </h2>
           </div>
           <p className="text-rich-dark/30 max-w-sm text-left hidden md:block text-sm font-medium leading-relaxed">
-            A hand-picked selection of the most exclusive properties in the global market.
+            A hand-picked selection of properties and investment opportunities in Howrah and Kolkata.
           </p>
         </div>
 

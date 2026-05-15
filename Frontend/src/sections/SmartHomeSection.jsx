@@ -4,39 +4,39 @@ import { GlassCard } from '../components/common/UI';
 
 const features = [
   {
-    icon: Cpu,
-    title: "AI Automation",
-    desc: "Intelligent systems that learn your preferences and automate your home environment.",
+    icon: ShieldAlert,
+    title: "11+ Years Experience",
+    desc: "A decade of expertise in providing top-notch real estate and home loan solutions.",
     color: "text-emerald-500"
   },
   {
     icon: Lightbulb,
-    title: "Smart Lighting",
-    desc: "Energy-efficient lighting that adjusts to your mood and time of day.",
-    color: "text-emerald-500"
-  },
-  {
-    icon: ShieldAlert,
-    title: "Advanced Security",
-    desc: "State-of-the-art biometric access and 24/7 intelligent monitoring.",
+    title: "Expert Guidance",
+    desc: "Professional advice for first-time home buyers and seasoned investors alike.",
     color: "text-emerald-500"
   },
   {
     icon: Sun,
-    title: "Solar Power",
-    desc: "Integrated solar energy solutions for sustainable and cost-effective living.",
+    title: "Transparent Process",
+    desc: "Clear and honest communication at every step of your property journey.",
+    color: "text-emerald-500"
+  },
+  {
+    icon: Cpu,
+    title: "Fast Loan Approval",
+    desc: "Quick processing and coordination with major banks for hassle-free loans.",
     color: "text-emerald-500"
   },
   {
     icon: BatteryCharging,
-    title: "EV Ready",
-    desc: "Universal electric vehicle charging stations in every parking space.",
+    title: "Smooth Paperwork",
+    desc: "End-to-end documentation and property registration support.",
     color: "text-emerald-500"
   },
   {
     icon: Smartphone,
-    title: "Mobile Control",
-    desc: "Control every aspect of your home from your smartphone, anywhere in the world.",
+    title: "Professional Team",
+    desc: "Cooperative and highly responsive staff dedicated to your needs.",
     color: "text-emerald-500"
   }
 ];
@@ -53,13 +53,13 @@ const SmartHomeSection = ({ id }) => {
             whileInView={{ opacity: 1 }}
             className="text-primary font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block"
           >
-            SMART LIVING
+            WHY CHOOSE US
           </motion.span>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-rich-dark mb-6 leading-tight">
-            The Future of <span className="text-primary italic">Comfort</span>
+            Built on <span className="text-primary italic">Trust</span> & Expertise
           </h2>
           <p className="text-rich-dark/40 max-w-2xl mx-auto text-sm font-medium leading-relaxed">
-            AetherNest homes are equipped with the latest smart technologies, providing a seamless and intuitive living experience.
+            Disha Realty is a trusted name in Howrah, providing seamless property and home loan solutions with a focus on customer satisfaction.
           </p>
         </div>
 
@@ -92,25 +92,25 @@ const SmartHomeSection = ({ id }) => {
               <div className="p-16 flex flex-col justify-center">
                 <div className="flex items-center gap-4 mb-8 text-primary">
                   <Smartphone size={32} />
-                  <span className="text-3xl font-bold tracking-tight text-rich-dark leading-tight">Total Control <br /> at Your Fingertips</span>
+                  <span className="text-3xl font-bold tracking-tight text-rich-dark leading-tight">End-to-End <br /> Support</span>
                 </div>
                 <p className="text-rich-dark/40 mb-12 leading-relaxed font-medium text-sm">
-                  The AetherNest app allows you to monitor and control your home's systems from anywhere in the world.
+                  From initial property search to final bank coordination, our team stays with you at every step.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-5 rounded-[1.5rem] bg-gray-50 border border-gray-100 group hover:border-primary/20 transition-all">
                     <div className="flex items-center gap-4">
                       <Thermometer className="text-primary" size={20} />
-                      <span className="text-sm font-bold text-rich-dark">Temperature</span>
+                      <span className="text-sm font-bold text-rich-dark">Loan Status</span>
                     </div>
-                    <span className="text-primary font-bold text-lg">22°C</span>
+                    <span className="text-primary font-bold text-lg">Processing</span>
                   </div>
                   <div className="flex items-center justify-between p-5 rounded-[1.5rem] bg-gray-50 border border-primary/20 group">
                     <div className="flex items-center gap-4">
                       <ShieldAlert className="text-primary" size={20} />
-                      <span className="text-sm font-bold text-rich-dark">Security System</span>
+                      <span className="text-sm font-bold text-rich-dark">Bank Coordination</span>
                     </div>
-                    <span className="text-primary font-bold text-xs uppercase tracking-widest">Active</span>
+                    <span className="text-primary font-bold text-xs uppercase tracking-widest">In Progress</span>
                   </div>
                 </div>
               </div>

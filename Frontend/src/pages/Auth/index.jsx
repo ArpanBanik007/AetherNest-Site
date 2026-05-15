@@ -63,11 +63,11 @@ const Auth = () => {
           >
             <div className="flex items-center gap-4 mb-16">
               <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-white shadow-xl shadow-primary/20">
-                <span className="text-2xl font-black italic">A</span>
+                <span className="text-2xl font-black italic">D</span>
               </div>
               <div className="flex flex-col -gap-1">
-                <span className="text-2xl font-extrabold tracking-tight text-rich-dark">AETHERNEST</span>
-                <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">Elite Real Estate</span>
+                <span className="text-2xl font-extrabold tracking-tight text-rich-dark">DISHA REALTY</span>
+                <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">Home Loan & Real Estate</span>
               </div>
             </div>
             

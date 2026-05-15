@@ -3,14 +3,14 @@ import { Home, Building2, Palmtree, Hotel, Factory, Tent, Warehouse, Building } 
 import { GlassCard } from '../components/common/UI';
 
 const categories = [
-  { name: "Apartments", icon: Building2, count: "120+", color: "text-emerald-500" },
-  { name: "Luxury Villas", icon: Home, count: "85+", color: "text-emerald-500" },
-  { name: "Smart Homes", icon: Building, count: "45+", color: "text-emerald-500" },
-  { name: "Commercial", icon: Hotel, count: "30+", color: "text-emerald-500" },
-  { name: "Penthouses", icon: Building2, count: "15+", color: "text-emerald-500" },
-  { name: "Beach Houses", icon: Palmtree, count: "25+", color: "text-emerald-500" },
-  { name: "Farmhouses", icon: Tent, count: "12+", color: "text-emerald-500" },
-  { name: "Office Spaces", icon: Warehouse, count: "50+", color: "text-emerald-500" },
+  { name: "Home Loan Assistance", icon: Building2, count: "Fast", color: "text-emerald-500" },
+  { name: "Property Guidance", icon: Home, count: "Expert", color: "text-emerald-500" },
+  { name: "Registration Support", icon: Building, count: "Smooth", color: "text-emerald-500" },
+  { name: "Loan Processing", icon: Hotel, count: "Quick", color: "text-emerald-500" },
+  { name: "Bank Coordination", icon: Building2, count: "Direct", color: "text-emerald-500" },
+  { name: "Residential Sales", icon: Palmtree, count: "Best", color: "text-emerald-500" },
+  { name: "Rental Consultation", icon: Tent, count: "Easy", color: "text-emerald-500" },
+  { name: "Documentation", icon: Warehouse, count: "Hassle-free", color: "text-emerald-500" },
 ];
 
 const PropertyCategories = ({ id }) => {
@@ -26,9 +26,9 @@ const PropertyCategories = ({ id }) => {
             DISCOVER THE BEST
           </motion.span>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-rich-dark mb-4">
-            Property <span className="text-primary italic">Categories</span>
+            Our <span className="text-primary italic">Services</span>
           </h2>
-          <p className="text-rich-dark/40 text-sm font-medium">Explore our curated collections of ultra-luxury properties.</p>
+          <p className="text-rich-dark/40 text-sm font-medium">Expert consultancy for all your real estate and home loan needs.</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">

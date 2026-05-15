@@ -4,10 +4,10 @@ import { Calculator, DollarSign, Percent, Calendar, ArrowRight } from 'lucide-re
 import { GlassCard, GlowButton } from '../components/common/UI';
 
 const MortgageCalculator = ({ id }) => {
-  const [price, setPrice] = useState(1500000);
-  const [downPayment, setDownPayment] = useState(300000);
-  const [interestRate, setInterestRate] = useState(4.5);
-  const [loanTerm, setLoanTerm] = useState(25);
+  const [price, setPrice] = useState(5000000);
+  const [downPayment, setDownPayment] = useState(1000000);
+  const [interestRate, setInterestRate] = useState(8.5);
+  const [loanTerm, setLoanTerm] = useState(20);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
 
   useEffect(() => {
@@ -29,17 +29,17 @@ const MortgageCalculator = ({ id }) => {
           <div>
             <span className="text-primary font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block">FINANCIAL PLANNING</span>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-rich-dark mb-8">
-              Mortgage <span className="text-primary italic">Calculator</span>
+              EMI <span className="text-primary italic">Calculator</span>
             </h2>
             <p className="text-lg text-rich-dark/60 mb-10 leading-relaxed">
-              Estimate your monthly payments and plan your luxury property investment with our intuitive calculator tool.
+              Estimate your monthly payments and plan your property purchase with our intuitive EMI calculator tool.
             </p>
             <div className="space-y-6">
               {[
                 "Calculate monthly repayments instantly",
                 "Adjust interest rates and loan terms",
                 "Plan your down payment strategy",
-                "Get pre-approved in minutes"
+                "Get expert consultation"
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
@@ -56,13 +56,13 @@ const MortgageCalculator = ({ id }) => {
               <div className="space-y-4">
                 <div className="flex justify-between items-end">
                   <label className="text-xs font-bold text-rich-dark/40 uppercase tracking-widest">Property Price</label>
-                  <span className="text-lg font-bold text-rich-dark">${price.toLocaleString()}</span>
+                  <span className="text-lg font-bold text-rich-dark">₹{price.toLocaleString('en-IN')}</span>
                 </div>
                 <input 
                   type="range" 
-                  min="100000" 
-                  max="10000000" 
-                  step="50000"
+                  min="500000" 
+                  max="20000000" 
+                  step="100000"
                   value={price}
                   onChange={(e) => setPrice(Number(e.target.value))}
                   className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-primary"
@@ -72,13 +72,13 @@ const MortgageCalculator = ({ id }) => {
               <div className="space-y-4">
                 <div className="flex justify-between items-end">
                   <label className="text-xs font-bold text-rich-dark/40 uppercase tracking-widest">Down Payment</label>
-                  <span className="text-lg font-bold text-rich-dark">${downPayment.toLocaleString()}</span>
+                  <span className="text-lg font-bold text-rich-dark">₹{downPayment.toLocaleString('en-IN')}</span>
                 </div>
                 <input 
                   type="range" 
                   min="0" 
                   max={price} 
-                  step="10000"
+                  step="50000"
                   value={downPayment}
                   onChange={(e) => setDownPayment(Number(e.target.value))}
                   className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-primary"
@@ -113,14 +113,14 @@ const MortgageCalculator = ({ id }) => {
               </div>
 
               <div className="pt-8 border-t border-gray-50">
-                <div className="text-xs font-bold text-rich-dark/40 uppercase tracking-widest mb-2">Estimated Monthly Payment</div>
+                <div className="text-xs font-bold text-rich-dark/40 uppercase tracking-widest mb-2">Estimated Monthly EMI</div>
                 <div className="text-5xl font-bold text-primary tracking-tight">
-                  ${Math.round(monthlyPayment).toLocaleString()}
+                  ₹{Math.round(monthlyPayment).toLocaleString('en-IN')}
                 </div>
               </div>
 
               <GlowButton variant="emerald" className="w-full py-5 text-xs shadow-xl shadow-primary/20">
-                Get Pre-Approved Now
+                Get Expert Consultation
               </GlowButton>
             </div>
           </GlassCard>
