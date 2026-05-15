@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { ShieldCheck, Target, Users, Award, MapPin, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { GlowButton } from '../../components/common/UI';
 
 const About = () => {
+  const navigate = useNavigate();
   const stats = [
+
     { label: 'Asset Magnitude', value: '$12.4B+' },
     { label: 'Elite Closures', value: '2,500+' },
     { label: 'Global Advisors', value: '150+' },
@@ -29,9 +32,10 @@ const About = () => {
               AetherNest isn't just a real estate platform; it's a gateway to the most exclusive lifestyle experiences in the UAE. We curate architectural masterpieces for those who demand nothing less than perfection.
             </p>
             <div className="flex flex-wrap gap-6">
-              <GlowButton variant="emerald" className="px-10 py-5 text-[10px]">
+              <GlowButton variant="emerald" className="px-10 py-5 text-[10px]" onClick={() => navigate('/properties')}>
                 Explore Portfolio
               </GlowButton>
+
               <button className="px-10 py-5 rounded-2xl border border-gray-100 text-[10px] font-bold text-rich-dark uppercase tracking-[0.2em] hover:bg-gray-50 transition-all">
                 The Aether Standard
               </button>

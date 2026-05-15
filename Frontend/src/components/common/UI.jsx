@@ -45,3 +45,8 @@ export const StatCard = ({ label, value, icon, color = "text-primary", bg = "bg-
     </div>
   </div>
 );
+
+export const Skeleton = ({ className = "" }) => (
+  <div className={`animate-pulse bg-gray-100 rounded-2xl ${className}`} />
+);
+

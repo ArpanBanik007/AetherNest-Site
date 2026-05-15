@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Calendar, Clock, CheckCircle, ChevronRight, MapPin } from 'lucide-react';
+import { X, Calendar, Clock, CheckCircle, ChevronRight, MapPin, Loader2 } from 'lucide-react';
 import { GlowButton } from '../common/UI';
+import useBookingStore from '../../store/useBookingStore';
+import useUIStore from '../../store/useUIStore';
 
 const ScheduleVisitModal = ({ isOpen, onClose, property }) => {
   const [step, setStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const { scheduleVisit, loading } = useBookingStore();
+  const { addToast } = useUIStore();
 
   const timeSlots = ["09:00 AM", "11:00 AM", "02:00 PM", "04:00 PM", "06:00 PM"];
   const dates = [
@@ -20,9 +24,32 @@ const ScheduleVisitModal = ({ isOpen, onClose, property }) => {
   const handleNext = () => {
     if (step === 1 && selectedDate && selectedTime) {
       setStep(2);
-    } else if (step === 2) {
-      setStep(3);
     }
+  };
+
+  const handleConfirm = async () => {
+    const result = await scheduleVisit({
+      propertyId: property.id,
+      propertyTitle: property.title,
+      date: `May ${selectedDate}, 2026`,
+      time: selectedTime,
+    });
+
+    if (result.success) {
+      setStep(3);
+      addToast({ 
+        title: 'Booking Confirmed', 
+        message: `Your visit to ${property.title} has been scheduled.`, 
+        type: 'success' 
+      });
+    }
+  };
+
+  const handleClose = () => {
+    setStep(1);
+    setSelectedDate(null);
+    setSelectedTime(null);
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -33,7 +60,7 @@ const ScheduleVisitModal = ({ isOpen, onClose, property }) => {
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         exit={{ opacity: 0 }}
-        onClick={onClose}
+        onClick={handleClose}
         className="absolute inset-0 bg-rich-dark/60 backdrop-blur-md"
       />
       
@@ -51,7 +78,7 @@ const ScheduleVisitModal = ({ isOpen, onClose, property }) => {
           />
         </div>
 
-        <button onClick={onClose} className="absolute top-8 right-8 text-gray-400 hover:text-rich-dark transition-colors">
+        <button onClick={handleClose} className="absolute top-8 right-8 text-gray-400 hover:text-rich-dark transition-colors">
           <X size={24} />
         </button>
 
@@ -160,10 +187,18 @@ const ScheduleVisitModal = ({ isOpen, onClose, property }) => {
                 </div>
 
                 <div className="mt-12 space-y-4">
-                  <GlowButton variant="emerald" className="w-full py-5" onClick={handleNext}>
-                    Book Appointment
-                  </GlowButton>
-                  <button onClick={() => setStep(1)} className="w-full py-2 text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-rich-dark">
+                  <button 
+                    disabled={loading}
+                    onClick={handleConfirm}
+                    className="w-full py-5 rounded-2xl bg-emerald-500 text-white font-bold text-[10px] uppercase tracking-[0.2em] shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-all flex items-center justify-center gap-3 disabled:opacity-70"
+                  >
+                    {loading ? <Loader2 className="animate-spin" size={18} /> : "Book Appointment"}
+                  </button>
+                  <button 
+                    disabled={loading}
+                    onClick={() => setStep(1)} 
+                    className="w-full py-2 text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-rich-dark disabled:opacity-50"
+                  >
                     Go Back
                   </button>
                 </div>
@@ -182,7 +217,7 @@ const ScheduleVisitModal = ({ isOpen, onClose, property }) => {
                 </div>
                 <h2 className="text-3xl font-bold text-rich-dark dark:text-white mb-4">Visit Confirmed!</h2>
                 <p className="text-rich-dark/40 text-sm mb-12">An email has been sent with all the details. Our agent will contact you shortly.</p>
-                <GlowButton variant="emerald" className="px-12 py-5" onClick={onClose}>
+                <GlowButton variant="emerald" className="px-12 py-5" onClick={handleClose}>
                   Back to Property
                 </GlowButton>
               </motion.div>
@@ -193,5 +228,6 @@ const ScheduleVisitModal = ({ isOpen, onClose, property }) => {
     </div>
   );
 };
+
 
 export default ScheduleVisitModal;

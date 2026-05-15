@@ -2,21 +2,41 @@ import { motion } from 'framer-motion';
 import { X, Check, MapPin, Bed, Bath, Maximize, ArrowRight, Layers } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useCompareStore from '../../store/useCompareStore';
+import useUIStore from '../../store/useUIStore';
 import { GlowButton } from '../../components/common/UI';
 
 const Compare = () => {
   const { comparedProperties, removeFromCompare, clearCompare } = useCompareStore();
+  const { addToast } = useUIStore();
   const navigate = useNavigate();
 
   const specs = [
-    { label: 'Market Valuation', key: 'price' },
+    { label: 'Market Valuation', key: 'price', format: 'price' },
     { label: 'Exclusive Location', key: 'location' },
     { label: 'Architecture Type', key: 'type' },
     { label: 'Suite Count', key: 'beds' },
     { label: 'Bathrooms', key: 'baths' },
-    { label: 'Total Magnitude', key: 'area' },
+    { label: 'Total Magnitude', key: 'area', suffix: ' sq ft' },
     { label: 'Portfolio Category', key: 'category' },
   ];
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
+  const handleRemove = (id, title) => {
+    removeFromCompare(id);
+    addToast({ title: 'Unit Removed', message: `${title} has been removed from comparison.`, type: 'info' });
+  };
+
+  const handleClear = () => {
+    clearCompare();
+    addToast({ title: 'Analysis Reset', message: 'Comparison portfolio has been cleared.', type: 'info' });
+  };
 
   if (comparedProperties.length === 0) {
     return (
@@ -56,7 +76,7 @@ const Compare = () => {
             </h1>
           </div>
           <button 
-            onClick={clearCompare}
+            onClick={handleClear}
             className="px-8 py-4 rounded-2xl bg-gray-50 border border-gray-100 text-[10px] font-bold text-red-500 uppercase tracking-[0.2em] hover:bg-red-50 transition-all active:scale-95"
           >
             Reset Analysis
@@ -77,7 +97,7 @@ const Compare = () => {
                         <img src={prop.image} alt={prop.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                       </div>
                       <button 
-                        onClick={() => removeFromCompare(prop.id)}
+                        onClick={() => handleRemove(prop.id, prop.title)}
                         className="absolute -top-3 -right-3 w-10 h-10 bg-white text-red-500 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform border border-gray-50"
                       >
                         <X size={18} />
@@ -100,7 +120,7 @@ const Compare = () => {
                   </td>
                   {comparedProperties.map((prop) => (
                     <td key={`${prop.id}-${spec.key}`} className="p-12 text-center text-sm font-extrabold text-rich-dark border-r border-gray-50 last:border-0">
-                      {prop[spec.key]}
+                      {spec.format === 'price' ? formatPrice(prop[spec.key]) : `${prop[spec.key]}${spec.suffix || ''}`}
                     </td>
                   ))}
                 </tr>
@@ -109,7 +129,7 @@ const Compare = () => {
                 <td className="p-12 border-r border-gray-50" />
                 {comparedProperties.map((prop) => (
                   <td key={`${prop.id}-action`} className="p-12 text-center border-r border-gray-50 last:border-0">
-                    <GlowButton variant="emerald" className="w-full py-5 text-[10px]">
+                    <GlowButton variant="emerald" className="w-full py-5 text-[10px]" onClick={() => navigate(`/property/${prop.id}`)}>
                       View Asset Profile
                     </GlowButton>
                   </td>
@@ -122,5 +142,6 @@ const Compare = () => {
     </div>
   );
 };
+
 
 export default Compare;

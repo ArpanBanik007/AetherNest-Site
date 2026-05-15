@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Lock, User, ArrowRight, Globe, ShieldCheck } from 'lucide-react';
-import { GlowButton, GlassCard } from '../../components/common/UI';
+import { Mail, Lock, User, ArrowRight, Globe, ShieldCheck, Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../../store/useAuthStore';
+import useUIStore from '../../store/useUIStore';
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -11,6 +13,39 @@ const GithubIcon = (props) => (
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const navigate = useNavigate();
+  
+  const { login, register, loading } = useAuthStore();
+  const { addToast } = useUIStore();
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (isLogin) {
+      const result = await login(formData.email, formData.password);
+      if (result.success) {
+        addToast({ title: 'Welcome Back!', message: 'Successfully authenticated.', type: 'success' });
+        navigate('/dashboard');
+      } else {
+        addToast({ title: 'Authentication Failed', message: result.error, type: 'error' });
+      }
+    } else {
+      if (!formData.name || !formData.email || !formData.password) {
+        addToast({ title: 'Error', message: 'All fields are required', type: 'error' });
+        return;
+      }
+      const result = await register(formData);
+      if (result.success) {
+        addToast({ title: 'Welcome!', message: 'Account created successfully.', type: 'success' });
+        navigate('/dashboard');
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-6 relative overflow-hidden">
@@ -93,7 +128,7 @@ const Auth = () => {
               </button>
             </div>
 
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <AnimatePresence mode="wait">
                 {!isLogin && (
                   <motion.div
@@ -106,8 +141,12 @@ const Auth = () => {
                       <User className="absolute left-6 top-1/2 -translate-y-1/2 text-rich-dark/20" size={18} />
                       <input 
                         type="text" 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
                         placeholder="Full Name" 
                         className="w-full bg-gray-50 border-none rounded-2xl py-5 pl-16 pr-6 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/20"
+                        required
                       />
                     </div>
                   </motion.div>
@@ -118,8 +157,12 @@ const Auth = () => {
                 <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-rich-dark/20" size={18} />
                 <input 
                   type="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   placeholder="Email Address" 
                   className="w-full bg-gray-50 border-none rounded-2xl py-5 pl-16 pr-6 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/20"
+                  required
                 />
               </div>
 
@@ -127,8 +170,12 @@ const Auth = () => {
                 <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-rich-dark/20" size={18} />
                 <input 
                   type="password" 
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
                   placeholder="Password" 
                   className="w-full bg-gray-50 border-none rounded-2xl py-5 pl-16 pr-6 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/20"
+                  required
                 />
               </div>
 
@@ -138,8 +185,12 @@ const Auth = () => {
                 </div>
               )}
 
-              <button className="w-full bg-primary text-white py-6 rounded-2xl font-bold text-[10px] uppercase tracking-[0.2em] shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300 flex items-center justify-center gap-3 active:scale-95 mt-4">
-                {isLogin ? "Authenticate Account" : "Initialize Membership"} <ArrowRight size={18} />
+              <button 
+                disabled={loading}
+                className="w-full bg-primary text-white py-6 rounded-2xl font-bold text-[10px] uppercase tracking-[0.2em] shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300 flex items-center justify-center gap-3 active:scale-95 mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {loading ? <Loader2 className="animate-spin" size={18} /> : (isLogin ? "Authenticate Account" : "Initialize Membership")} 
+                {!loading && <ArrowRight size={18} />}
               </button>
 
               <div className="relative py-6">
@@ -166,5 +217,6 @@ const Auth = () => {
     </div>
   );
 };
+
 
 export default Auth;

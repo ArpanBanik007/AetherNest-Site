@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { MapPin, Bed, Bath, Maximize, Heart, Share2, Calendar, Phone, Mail, ShieldCheck, Map as MapIcon, Info, ChevronRight, PlayCircle, Camera } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Bed, Bath, Maximize, Heart, Share2, Calendar, Phone, Mail, ShieldCheck, Map as MapIcon, Info, ChevronRight, PlayCircle, Camera, Loader2 } from 'lucide-react';
 import { properties } from '../../data/properties';
 import { GlowButton, GlassCard } from '../../components/common/UI';
 import ScheduleVisitModal from '../../components/features/ScheduleVisitModal';
+import MortgageCalculator from '../../components/features/MortgageCalculator';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import useAuthStore from '../../store/useAuthStore';
+import useUIStore from '../../store/useUIStore';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -19,6 +22,10 @@ const PropertyDetails = () => {
   const [property, setProperty] = useState(null);
   const [isVisitModalOpen, setIsVisitModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
+  const [inquiryLoading, setInquiryLoading] = useState(false);
+  
+  const { user, toggleWishlist, isAuthenticated } = useAuthStore();
+  const { addToast } = useUIStore();
 
   useEffect(() => {
     const found = properties.find(p => p.id === parseInt(id));
@@ -26,6 +33,35 @@ const PropertyDetails = () => {
       setProperty(found);
     }
   }, [id]);
+
+  const isWishlisted = user?.wishlist?.includes(property?.id);
+
+  const handleWishlistToggle = () => {
+    if (!isAuthenticated) {
+      addToast({ title: 'Sign In Required', message: 'Please login to save properties.', type: 'info' });
+      return;
+    }
+    toggleWishlist(property.id);
+    addToast({ 
+      title: isWishlisted ? 'Removed' : 'Saved', 
+      message: isWishlisted ? 'Removed from favorites.' : 'Added to your favorites.', 
+      type: isWishlisted ? 'info' : 'success' 
+    });
+  };
+
+  const handleInquirySubmit = async (e) => {
+    e.preventDefault();
+    setInquiryLoading(true);
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setInquiryLoading(false);
+    addToast({ 
+      title: 'Inquiry Sent', 
+      message: 'Your message has been sent to our agent. We will contact you shortly.', 
+      type: 'success' 
+    });
+    e.target.reset();
+  };
 
   const handleImageError = (e) => {
     e.target.src = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop";
@@ -39,6 +75,14 @@ const PropertyDetails = () => {
     "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=2000&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600585154526-990dcea4db0d?q=80&w=2000&auto=format&fit=crop"
   ];
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
 
   return (
     <div className="pt-20 bg-white min-h-screen">
@@ -96,7 +140,7 @@ const PropertyDetails = () => {
                 </div>
                 <div className="bg-gray-50 p-8 rounded-[2.5rem] border border-gray-100 min-w-[240px]">
                   <p className="text-[10px] font-bold text-rich-dark/20 uppercase tracking-[0.2em] mb-2">Listing Price</p>
-                  <p className="text-4xl font-extrabold text-primary">{property.price}</p>
+                  <p className="text-4xl font-extrabold text-primary">{formatPrice(property.price)}</p>
                   <p className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mt-2">Fully Furnished</p>
                 </div>
               </div>
@@ -106,10 +150,21 @@ const PropertyDetails = () => {
                 <GlowButton variant="emerald" className="flex-1 py-5 text-[10px]" onClick={() => setIsVisitModalOpen(true)}>
                   <Calendar size={18} /> Schedule a Private Viewing
                 </GlowButton>
-                <button className="w-16 h-16 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-rich-dark/20 hover:text-red-500 hover:bg-white hover:shadow-premium transition-all">
-                  <Heart size={20} />
+                <button 
+                  onClick={handleWishlistToggle}
+                  className={`w-16 h-16 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center transition-all ${
+                    isWishlisted ? 'text-rose-500 bg-white shadow-premium' : 'text-rich-dark/20 hover:text-rose-500 hover:bg-white hover:shadow-premium'
+                  }`}
+                >
+                  <Heart size={20} fill={isWishlisted ? "currentColor" : "none"} />
                 </button>
-                <button className="w-16 h-16 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-rich-dark/20 hover:text-primary hover:bg-white hover:shadow-premium transition-all">
+                <button 
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    addToast({ title: 'Link Copied', message: 'Property link copied to clipboard.', type: 'success' });
+                  }}
+                  className="w-16 h-16 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-rich-dark/20 hover:text-primary hover:bg-white hover:shadow-premium transition-all"
+                >
                   <Share2 size={20} />
                 </button>
               </div>
@@ -120,8 +175,8 @@ const PropertyDetails = () => {
               {[
                 { icon: Bed, value: property.beds, label: 'Bedrooms' },
                 { icon: Bath, value: property.baths, label: 'Bathrooms' },
-                { icon: Maximize, value: property.area.split(' ')[0], label: 'Square Feet' },
-                { icon: ShieldCheck, value: '2026', label: 'Year Built' }
+                { icon: Maximize, value: property.area, label: 'Square Feet' },
+                { icon: ShieldCheck, value: property.yearBuilt || '2024', label: 'Year Built' }
               ].map((spec, i) => (
                 <div key={i} className="space-y-3">
                   <div className="flex items-center gap-4">
@@ -154,28 +209,28 @@ const PropertyDetails = () => {
 
               <div className="text-rich-dark/50 leading-[1.8] font-medium text-lg">
                 {activeTab === 'overview' && (
-                  <div className="space-y-8">
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
                     <p className="text-2xl text-rich-dark font-extrabold leading-tight">A masterpiece of contemporary architecture and ultra-luxury finishing.</p>
                     <p>{property.description}</p>
                     <p>Every element of this property has been curated for the most discerning client, featuring floor-to-ceiling glass walls, premium Italian marble, and a bespoke smart-home integration system.</p>
-                  </div>
+                  </motion.div>
                 )}
                 {activeTab === 'amenities' && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-                    {[
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                    {(property.amenities || [
                       "Custom Smart Home AI", "Olympic Infinity Pool", "State-of-the-art Cinema", 
                       "Climate Controlled Wine Vault", "Professional Chef's Kitchen", "Private Sky-Elevator",
                       "Full-service Wellness Spa", "Executive Staff Suites", "6-Car Private Gallery"
-                    ].map((item, i) => (
+                    ]).map((item, i) => (
                       <div key={i} className="flex items-center gap-4 py-4 border-b border-gray-50">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-lg shadow-primary/40" />
                         <span className="text-xs font-bold text-rich-dark uppercase tracking-widest">{item}</span>
                       </div>
                     ))}
-                  </div>
+                  </motion.div>
                 )}
                 {activeTab === 'location' && (
-                  <div className="space-y-10">
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-10">
                     <p>Perfectly positioned in an elite residential enclave with immediate access to private beaches, Michelin-starred dining, and prestigious international hubs.</p>
                     <div className="h-96 bg-gray-50 rounded-[3rem] flex items-center justify-center border border-gray-100 relative overflow-hidden group">
                       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5" />
@@ -187,7 +242,12 @@ const PropertyDetails = () => {
                         <button className="mt-4 text-primary font-bold text-[10px] uppercase tracking-widest hover:underline">Launch Map View</button>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
+                )}
+                {activeTab === 'mortgage' && (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    <MortgageCalculator propertyPrice={property.price} />
+                  </motion.div>
                 )}
               </div>
             </div>
@@ -230,10 +290,15 @@ const PropertyDetails = () => {
                   <Info size={16} className="text-primary/40" />
                   <span className="text-[10px] font-bold text-rich-dark/20 uppercase tracking-[0.2em]">Priority Inquiry</span>
                 </div>
-                <form className="space-y-5">
-                  <input type="text" placeholder="Full Name" className="w-full bg-gray-50 border border-gray-50 rounded-2xl py-5 px-6 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all outline-none placeholder:text-rich-dark/20" />
-                  <textarea placeholder="Your inquiry..." className="w-full bg-gray-50 border border-gray-50 rounded-2xl py-5 px-6 text-sm font-bold text-rich-dark h-32 focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all outline-none resize-none placeholder:text-rich-dark/20" />
-                  <button className="w-full bg-rich-dark text-white py-5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-primary transition-colors shadow-lg shadow-black/5 active:scale-95">Send Request</button>
+                <form onSubmit={handleInquirySubmit} className="space-y-5">
+                  <input type="text" required placeholder="Full Name" className="w-full bg-gray-50 border border-gray-50 rounded-2xl py-5 px-6 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all outline-none placeholder:text-rich-dark/20" />
+                  <textarea required placeholder="Your inquiry..." className="w-full bg-gray-50 border border-gray-50 rounded-2xl py-5 px-6 text-sm font-bold text-rich-dark h-32 focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all outline-none resize-none placeholder:text-rich-dark/20" />
+                  <button 
+                    disabled={inquiryLoading}
+                    className="w-full bg-rich-dark text-white py-5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-primary transition-colors shadow-lg shadow-black/5 active:scale-95 flex items-center justify-center gap-3"
+                  >
+                    {inquiryLoading ? <Loader2 className="animate-spin" size={18} /> : "Send Request"}
+                  </button>
                 </form>
               </div>
             </div>
@@ -272,5 +337,6 @@ const PropertyDetails = () => {
     </div>
   );
 };
+
 
 export default PropertyDetails;

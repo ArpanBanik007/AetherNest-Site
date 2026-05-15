@@ -1,37 +1,27 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Filter, Search, Grid, List as ListIcon, Map as MapIcon, SlidersHorizontal, ChevronDown } from 'lucide-react';
+import { Filter, Search, Grid, List as ListIcon, Map as MapIcon, SlidersHorizontal, ChevronDown, RotateCcw } from 'lucide-react';
 import PropertyCard from '../../components/common/PropertyCard';
 import { PropertyListSkeleton } from '../../skeletons/PropertySkeleton';
-import { properties } from '../../data/properties';
+import usePropertyStore from '../../store/usePropertyStore';
 
 const Listings = () => {
-  const [loading, setLoading] = useState(true);
   const [view, setView] = useState('grid');
-  const [filteredProperties, setFilteredProperties] = useState(properties);
-  const [filters, setFilters] = useState({
-    type: 'All',
-    priceRange: 'All',
-    beds: 'All'
-  });
+  const { 
+    filteredProperties, 
+    loading, 
+    filters, 
+    setFilter, 
+    resetFilters,
+    applyFilters 
+  } = usePropertyStore();
 
   useEffect(() => {
-    // Simulate data fetching
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1200);
-    return () => clearTimeout(timer);
+    applyFilters();
   }, []);
 
   const handleFilterChange = (key, value) => {
-    const newFilters = { ...filters, [key]: value };
-    setFilters(newFilters);
-    
-    let result = properties;
-    if (newFilters.type !== 'All') {
-      result = result.filter(p => p.type === newFilters.type);
-    }
-    setFilteredProperties(result);
+    setFilter(key, value);
   };
 
   return (
@@ -79,26 +69,69 @@ const Listings = () => {
         {/* Filters Bar */}
         <div className="bg-gray-50 p-4 rounded-[2.5rem] border border-gray-100 shadow-premium mb-16">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {[
-              { label: 'Property Type', options: ['All Types', 'Villa', 'Apartment', 'Penthouse'], key: 'type' },
-              { label: 'Price Range', options: ['All Prices', '$1M - $5M', '$5M - $10M', '$10M+'], key: 'priceRange' },
-              { label: 'Bedrooms', options: ['Any Beds', '2+ Beds', '4+ Beds', '6+ Beds'], key: 'beds' },
-              { label: 'Location', options: ['Any Location', 'Dubai Marina', 'Palm Jumeirah', 'Emirates Hills'], key: 'location' }
-            ].map((filter) => (
-              <div key={filter.key} className="relative group">
-                <select 
-                  className="w-full bg-white border border-gray-100 rounded-2xl py-4.5 px-6 text-[11px] font-bold text-rich-dark appearance-none cursor-pointer focus:ring-2 focus:ring-primary/10 transition-all outline-none"
-                  onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-                >
-                  {filter.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                </select>
-                <ChevronDown size={14} className="absolute right-6 top-1/2 -translate-y-1/2 text-rich-dark/20 pointer-events-none group-hover:text-primary transition-colors" />
-              </div>
-            ))}
+            <div className="relative group">
+              <select 
+                className="w-full bg-white border border-gray-100 rounded-2xl py-4.5 px-6 text-[11px] font-bold text-rich-dark appearance-none cursor-pointer focus:ring-2 focus:ring-primary/10 transition-all outline-none"
+                value={filters.type}
+                onChange={(e) => handleFilterChange('type', e.target.value)}
+              >
+                <option value="All">All Types</option>
+                <option value="Villa">Villa</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Penthouse">Penthouse</option>
+                <option value="Townhouse">Townhouse</option>
+              </select>
+              <ChevronDown size={14} className="absolute right-6 top-1/2 -translate-y-1/2 text-rich-dark/20 pointer-events-none group-hover:text-primary transition-colors" />
+            </div>
 
-            <button className="col-span-2 lg:col-span-1 bg-primary text-white rounded-2xl py-4.5 px-6 text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95">
-              <SlidersHorizontal size={16} />
-              Filter
+            <div className="relative group">
+              <select 
+                className="w-full bg-white border border-gray-100 rounded-2xl py-4.5 px-6 text-[11px] font-bold text-rich-dark appearance-none cursor-pointer focus:ring-2 focus:ring-primary/10 transition-all outline-none"
+                value={filters.beds}
+                onChange={(e) => handleFilterChange('beds', e.target.value)}
+              >
+                <option value="Any">Any Beds</option>
+                <option value="2">2+ Beds</option>
+                <option value="4">4+ Beds</option>
+                <option value="6">6+ Beds</option>
+              </select>
+              <ChevronDown size={14} className="absolute right-6 top-1/2 -translate-y-1/2 text-rich-dark/20 pointer-events-none group-hover:text-primary transition-colors" />
+            </div>
+
+            <div className="relative group">
+              <select 
+                className="w-full bg-white border border-gray-100 rounded-2xl py-4.5 px-6 text-[11px] font-bold text-rich-dark appearance-none cursor-pointer focus:ring-2 focus:ring-primary/10 transition-all outline-none"
+                value={filters.location}
+                onChange={(e) => handleFilterChange('location', e.target.value)}
+              >
+                <option value="All">Any Location</option>
+                <option value="Dubai Marina">Dubai Marina</option>
+                <option value="Palm Jumeirah">Palm Jumeirah</option>
+                <option value="Emirates Hills">Emirates Hills</option>
+                <option value="Downtown">Downtown Dubai</option>
+              </select>
+              <ChevronDown size={14} className="absolute right-6 top-1/2 -translate-y-1/2 text-rich-dark/20 pointer-events-none group-hover:text-primary transition-colors" />
+            </div>
+
+            <div className="relative group col-span-2 lg:col-span-1">
+              <div className="flex items-center gap-4 bg-white border border-gray-100 rounded-2xl py-4 px-6">
+                <Search size={16} className="text-rich-dark/20" />
+                <input 
+                  type="text"
+                  placeholder="Search location..."
+                  className="bg-transparent border-none p-0 w-full text-[11px] font-bold text-rich-dark focus:ring-0 placeholder:text-rich-dark/20"
+                  value={filters.search}
+                  onChange={(e) => handleFilterChange('search', e.target.value)}
+                />
+              </div>
+            </div>
+
+            <button 
+              onClick={resetFilters}
+              className="col-span-2 lg:col-span-1 bg-white border border-gray-100 text-rich-dark/40 hover:text-primary rounded-2xl py-4.5 px-6 text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95"
+            >
+              <RotateCcw size={16} />
+              Reset
             </button>
           </div>
         </div>
@@ -107,11 +140,25 @@ const Listings = () => {
         {loading ? (
           <PropertyListSkeleton />
         ) : filteredProperties.length > 0 ? (
-          <div className={`grid ${view === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'} gap-10`}>
-            {filteredProperties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
-          </div>
+          <motion.div 
+            layout
+            className={`grid ${view === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'} gap-10`}
+          >
+            <AnimatePresence>
+              {filteredProperties.map((property) => (
+                <motion.div
+                  key={property.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <PropertyCard property={property} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         ) : (
           <div className="py-32 text-center bg-gray-50 rounded-[4rem] border border-gray-100">
             <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-8 text-primary/20 shadow-premium">
@@ -120,7 +167,7 @@ const Listings = () => {
             <h3 className="text-2xl font-bold text-rich-dark mb-4">No results matching your criteria</h3>
             <p className="text-rich-dark/40 max-w-sm mx-auto font-medium">Try broadening your search or adjusting the filters to find the perfect property.</p>
             <button 
-              onClick={() => { setFilters({ type: 'All', priceRange: 'All', beds: 'All' }); setFilteredProperties(properties); }}
+              onClick={resetFilters}
               className="mt-8 text-primary font-bold text-[10px] uppercase tracking-widest hover:underline"
             >
               Reset all filters
@@ -131,5 +178,6 @@ const Listings = () => {
     </div>
   );
 };
+
 
 export default Listings;

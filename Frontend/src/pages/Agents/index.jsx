@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, MapPin, Star, ShieldCheck, Phone, Mail, ChevronRight, Filter } from 'lucide-react';
 import { GlowButton, GlassCard } from '../../components/common/UI';
+import useUIStore from '../../store/useUIStore';
+
 
 const agents = [
   {
@@ -53,6 +55,16 @@ const agents = [
 const Agents = () => {
   const handleImageError = (e) => {
     e.target.src = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop";
+  };
+
+  const { addToast } = useUIStore();
+
+  const handleJoinNetwork = () => {
+    addToast({ 
+      title: 'Application Received', 
+      message: 'Our recruitment team will review your credentials and contact you.', 
+      type: 'success' 
+    });
   };
 
   return (
@@ -140,9 +152,10 @@ const Agents = () => {
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-8">Ready to <span className="text-white/70 italic">Consult</span> with an Expert?</h2>
             <p className="text-white/80 max-w-xl mx-auto mb-12 text-lg font-medium leading-relaxed">Join Dubai's most elite network of real estate advisors and reach high-net-worth clients globally.</p>
-            <button className="bg-white text-primary hover:bg-gray-50 px-12 py-6 rounded-2xl font-bold text-xs uppercase tracking-widest shadow-xl transition-all active:scale-95">Apply to Join Network</button>
+            <button onClick={handleJoinNetwork} className="bg-white text-primary hover:bg-gray-50 px-12 py-6 rounded-2xl font-bold text-xs uppercase tracking-widest shadow-xl transition-all active:scale-95">Apply to Join Network</button>
           </div>
         </div>
+
       </div>
     </div>
   );

@@ -1,8 +1,26 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, MessageSquare, Clock, Globe, ArrowRight, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageSquare, Clock, Globe, ArrowRight, Send, Loader2 } from 'lucide-react';
 import { GlowButton, GlassCard } from '../../components/common/UI';
+import useUIStore from '../../store/useUIStore';
 
 const Contact = () => {
+  const { addToast } = useUIStore();
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setSubmitting(false);
+    addToast({ 
+      title: 'Inquiry Transmitted', 
+      message: 'A private wealth advisor will contact you within 24 hours.', 
+      type: 'success' 
+    });
+    e.target.reset();
+  };
+
   return (
     <div className="pt-32 pb-24 bg-white min-h-screen relative overflow-hidden">
       {/* Decorative Background Elements */}
@@ -78,12 +96,13 @@ const Contact = () => {
                 <p className="text-rich-dark/30 font-medium">Specify your requirements for a prioritized advisor assignment.</p>
               </div>
 
-              <form className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Full Legal Name</label>
                     <input 
                       type="text" 
+                      required
                       placeholder="Alexander Knight" 
                       className="w-full bg-gray-50 border-none rounded-2xl py-5 px-8 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/10"
                     />
@@ -92,6 +111,7 @@ const Contact = () => {
                     <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Private Email</label>
                     <input 
                       type="email" 
+                      required
                       placeholder="alex@knight-holdings.com" 
                       className="w-full bg-gray-50 border-none rounded-2xl py-5 px-8 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/10"
                     />
@@ -103,6 +123,7 @@ const Contact = () => {
                     <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Telephone</label>
                     <input 
                       type="tel" 
+                      required
                       placeholder="+971 50 000 0000" 
                       className="w-full bg-gray-50 border-none rounded-2xl py-5 px-8 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/10"
                     />
@@ -122,14 +143,23 @@ const Contact = () => {
                   <label className="text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.3em] ml-2">Inquiry Details</label>
                   <textarea 
                     rows="6"
+                    required
                     placeholder="Describe your architectural preferences, target locations, or investment objectives..." 
                     className="w-full bg-gray-50 border-none rounded-3xl py-6 px-8 text-sm font-bold text-rich-dark focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-rich-dark/10 resize-none"
                   ></textarea>
                 </div>
 
                 <div className="pt-8">
-                  <GlowButton variant="emerald" className="w-full py-6 text-[10px] uppercase tracking-[0.3em] shadow-xl shadow-primary/20 flex items-center justify-center gap-4 group">
-                    Submit Inquiry Registry <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <GlowButton 
+                    variant="emerald" 
+                    disabled={submitting}
+                    className="w-full py-6 text-[10px] uppercase tracking-[0.3em] shadow-xl shadow-primary/20 flex items-center justify-center gap-4 group disabled:opacity-70"
+                  >
+                    {submitting ? (
+                      <>Transmitting Inquiry <Loader2 size={18} className="animate-spin" /></>
+                    ) : (
+                      <>Submit Inquiry Registry <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>
+                    )}
                   </GlowButton>
                   <p className="text-center text-[9px] font-bold text-rich-dark/20 uppercase tracking-[0.2em] mt-8">
                     By submitting, you agree to our <span className="text-primary hover:underline cursor-pointer">Privacy Protocols</span> and <span className="text-primary hover:underline cursor-pointer">Terms of Engagement</span>.
@@ -160,5 +190,6 @@ const Contact = () => {
     </div>
   );
 };
+
 
 export default Contact;

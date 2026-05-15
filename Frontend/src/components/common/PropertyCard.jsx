@@ -3,10 +3,53 @@ import { Heart, Layers, MapPin, Bed, Bath, Maximize, ArrowRight } from 'lucide-r
 import { Link } from 'react-router-dom';
 import { GlassCard } from './UI';
 import useCompareStore from '../../store/useCompareStore';
+import useAuthStore from '../../store/useAuthStore';
+import useUIStore from '../../store/useUIStore';
 
 const PropertyCard = ({ property }) => {
-  const { addToCompare, comparedProperties } = useCompareStore();
+  const { addToCompare, comparedProperties, removeFromCompare } = useCompareStore();
+  const { user, toggleWishlist, isAuthenticated } = useAuthStore();
+  const { addToast } = useUIStore();
+
   const isCompared = comparedProperties.some(p => p.id === property.id);
+  const isWishlisted = user?.wishlist?.includes(property.id);
+
+  const handleCompareToggle = (e) => {
+    e.preventDefault();
+    if (isCompared) {
+      removeFromCompare(property.id);
+      addToast({ title: 'Removed', message: 'Property removed from comparison.', type: 'info' });
+    } else {
+      if (comparedProperties.length >= 4) {
+        addToast({ title: 'Limit Reached', message: 'You can compare up to 4 properties.', type: 'warning' });
+        return;
+      }
+      addToCompare(property);
+      addToast({ title: 'Added', message: 'Property added to comparison.', type: 'success' });
+    }
+  };
+
+  const handleWishlistToggle = (e) => {
+    e.preventDefault();
+    if (!isAuthenticated) {
+      addToast({ title: 'Sign In Required', message: 'Please login to save properties.', type: 'info' });
+      return;
+    }
+    toggleWishlist(property.id);
+    addToast({ 
+      title: isWishlisted ? 'Removed from Wishlist' : 'Saved to Wishlist', 
+      message: isWishlisted ? 'Property removed from your favorites.' : 'Property added to your favorites.', 
+      type: isWishlisted ? 'info' : 'success' 
+    });
+  };
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
 
   const handleImageError = (e) => {
     e.target.src = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2000&auto=format&fit=crop";
@@ -37,11 +80,16 @@ const PropertyCard = ({ property }) => {
           </div>
 
           <div className="absolute top-6 right-6 flex flex-col gap-3 translate-x-12 group-hover:translate-x-0 transition-transform duration-500">
-            <button className="w-11 h-11 rounded-2xl bg-white/90 backdrop-blur-md flex items-center justify-center text-rich-dark hover:text-red-500 shadow-lg transition-all active:scale-90">
-              <Heart size={20} />
+            <button 
+              onClick={handleWishlistToggle}
+              className={`w-11 h-11 rounded-2xl backdrop-blur-md flex items-center justify-center shadow-lg transition-all active:scale-90 ${
+                isWishlisted ? 'bg-rose-500 text-white' : 'bg-white/90 text-rich-dark hover:text-rose-500'
+              }`}
+            >
+              <Heart size={20} fill={isWishlisted ? "currentColor" : "none"} />
             </button>
             <button 
-              onClick={() => addToCompare(property)}
+              onClick={handleCompareToggle}
               className={`w-11 h-11 rounded-2xl backdrop-blur-md flex items-center justify-center shadow-lg transition-all active:scale-90 ${
                 isCompared ? 'bg-primary text-white' : 'bg-white/90 text-rich-dark hover:text-primary'
               }`}
@@ -52,7 +100,7 @@ const PropertyCard = ({ property }) => {
 
           <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
             <div className="bg-white/90 backdrop-blur-md rounded-2xl p-4 flex justify-between items-center shadow-lg">
-              <span className="text-xl font-bold text-primary">{property.price}</span>
+              <span className="text-xl font-bold text-primary">{formatPrice(property.price)}</span>
               <span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">View Details</span>
             </div>
           </div>
@@ -90,7 +138,7 @@ const PropertyCard = ({ property }) => {
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center gap-2.5 text-rich-dark/70">
                 <Maximize size={18} className="text-primary/40" />
-                <span className="text-sm font-bold">{property.area.split(' ')[0]}</span>
+                <span className="text-sm font-bold">{property.area}</span>
               </div>
               <span className="text-[10px] font-bold text-rich-dark/20 uppercase tracking-tighter">Sq Ft</span>
             </div>
@@ -109,5 +157,6 @@ const PropertyCard = ({ property }) => {
     </motion.div>
   );
 };
+
 
 export default PropertyCard;
