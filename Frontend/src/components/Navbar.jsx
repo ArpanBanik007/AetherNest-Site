@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, User, Search, Globe } from 'lucide-react';
+import { Menu, X, User, Search } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GlowButton } from '../components/common/UI';
 import SearchModal from './features/SearchModal';
@@ -11,101 +11,36 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -70% 0px',
-      threshold: 0
-    };
-
-    const observerCallback = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const sections = ['home', 'categories', 'properties', 'calculator', 'testimonials', 'contact'];
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      observer.disconnect();
-    };
-  }, [location.pathname]);
-
-  // Handle hash scroll on navigation
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
-    }
-  }, [location]);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/', id: 'home' },
-    { name: 'About Us', href: '/about', id: 'about' },
-    { name: 'Services', href: '/#categories', id: 'categories' },
-    { name: 'Loan Assistance', href: '/#calculator', id: 'calculator' },
-    { name: 'Properties', href: '/properties', id: 'properties' },
-    { name: 'Customer Reviews', href: '/#testimonials', id: 'testimonials' },
-    { name: 'Contact Us', href: '/contact', id: 'contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Loan Assistance', href: '/loan-assistance' },
+    { name: 'Properties', href: '/properties' },
+    { name: 'Customer Reviews', href: '/reviews' },
+    { name: 'Contact Us', href: '/contact' },
   ];
 
   const handleLinkClick = (e, href) => {
     e.preventDefault();
-    if (href.startsWith('/#')) {
-      const id = href.replace('/#', '');
-      if (location.pathname === '/') {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      } else {
-        navigate(href);
-      }
-    } else {
-      navigate(href);
-    }
+    navigate(href);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleMobileLinkClick = (e, href) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    if (href.startsWith('/#')) {
-      const id = href.replace('/#', '');
-      if (location.pathname === '/') {
-        const element = document.getElementById(id);
-        if (element) {
-          setTimeout(() => {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }, 300);
-        }
-      } else {
-        setTimeout(() => navigate(href), 300);
-      }
-    } else {
-      setTimeout(() => navigate(href), 300);
-    }
-  };
-
-  const handleDashboardClick = () => {
-    alert("Dashboard is coming soon to our valued customers!");
+    setTimeout(() => {
+      navigate(href);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 300);
   };
 
   return (
@@ -121,7 +56,10 @@ const Navbar = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-3 cursor-pointer group"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => {
+              navigate('/');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           >
             <div className="w-11 h-11 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/10 transition-transform duration-500">
               <span className="text-xl font-black text-white italic">D</span>
@@ -133,17 +71,15 @@ const Navbar = () => {
           </motion.div>
 
           {/* Desktop Links */}
-          <div className="hidden lg:flex items-center gap-10 ml-16">
+          <div className="hidden lg:flex items-center gap-10 ml-16 flex-nowrap">
             {navLinks.map((link) => {
-              const isActive = (link.href.startsWith('/#') && activeSection === link.id) || 
-                              (link.href === location.pathname) ||
-                              (link.href === '/' && location.pathname === '/' && activeSection === 'home');
+              const isActive = location.pathname === link.href;
 
               return (
                 <motion.button
                   key={link.name}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className={`transition-all font-bold text-[11px] uppercase tracking-widest relative py-1 ${
+                  className={`transition-all font-bold text-[11px] uppercase tracking-widest relative py-1 whitespace-nowrap flex-shrink-0 ${
                     isActive ? 'text-primary' : 'text-rich-dark/50 hover:text-primary'
                   }`}
                 >
@@ -198,16 +134,15 @@ const Navbar = () => {
             >
               <div className="flex flex-col gap-4 p-6">
                 {navLinks.map((link) => (
-                  <a 
+                  <button 
                     key={link.name} 
-                    href={link.href} 
-                    className={`text-lg font-bold transition-colors ${
-                      activeSection === link.id ? 'text-primary' : 'text-rich-dark/60 hover:text-rich-dark'
+                    className={`text-left text-lg font-bold transition-colors ${
+                      location.pathname === link.href ? 'text-primary' : 'text-rich-dark/60 hover:text-rich-dark'
                     }`}
                     onClick={(e) => handleMobileLinkClick(e, link.href)}
                   >
                     {link.name}
-                  </a>
+                  </button>
                 ))}
                 <div className="h-[1px] bg-gray-100 my-2" />
                 <GlowButton variant="emerald" className="w-full">Sign In</GlowButton>

@@ -13,6 +13,9 @@ import Contact from '../pages/Contact';
 import Auth from '../pages/Auth';
 import UserDashboard from '../pages/Dashboard/User';
 import AdminDashboard from '../pages/Dashboard/Admin';
+import Services from '../pages/Services';
+import LoanAssistance from '../pages/LoanAssistance';
+import Reviews from '../pages/Reviews';
 
 const AppRouter = () => {
   return (
@@ -27,6 +30,9 @@ const AppRouter = () => {
           <Route path="agents" element={<Agents />} />
           <Route path="blog" element={<Blog />} />
           <Route path="about" element={<About />} />
+          <Route path="services" element={<Services />} />
+          <Route path="loan-assistance" element={<LoanAssistance />} />
+          <Route path="reviews" element={<Reviews />} />
           <Route path="contact" element={<Contact />} />
         </Route>
 
